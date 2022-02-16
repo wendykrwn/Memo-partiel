@@ -53,6 +53,14 @@ class MemoController extends AbstractController
         $heureExpiration = $memo->getCreatedAt();
         $delaiExpiration = $memo->getDelaiExpiration();
         $heureExpiration->modify("+$delaiExpiration minutes");
+
+        if( new \DateTime() > $heureExpiration){
+            $response = new Response();
+            $response->setStatusCode(410);
+
+            return $response;
+        }
+
         return $this->render('memo/show.html.twig', [
             'memo' => $memo,
             'heureExpiration' => $heureExpiration
