@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\MemoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=MemoRepository::class)
@@ -24,6 +26,8 @@ class Memo
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\LessThanOrEqual(message="Le délai doit être inférieur à 180 min",value=180)
+     * @Assert\GreaterThanOrEqual(message="Le délai doit faire au moins 1 min", value=1)
      */
     private $delaiExpiration;
 
