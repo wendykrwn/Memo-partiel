@@ -33,16 +33,29 @@ class MemoController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            //TODO : Rajouter une date de création
+            $memo->setCreatedAt(new \DateTime());
 
             $manager->persist($memo);
             $manager->flush();
 
-            //TODO : Rediriger vers la page show
+            return $this->redirectToRoute('memo_show', [ "id" => $memo->getId()]);
         }
 
         return $this->render('memo/create.html.twig',[
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("memo/{id}", name="memo_show")
+     */
+    public function show(Memo $memo){
+        $heureExpiration = $memo->getCreatedAt();
+        $delaiExpiration = $memo->getDelaiExpiration();
+        $heureExpiration->modify("+$delaiExpiration minutes");
+        return $this->render('memo/show.html.twig', [
+            'memo' => $memo,
+            'heureExpiration' => $heureExpiration
         ]);
     }
 }

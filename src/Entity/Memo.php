@@ -31,6 +31,11 @@ class Memo
      */
     private $delaiExpiration;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,6 +61,18 @@ class Memo
     public function setDelaiExpiration(?int $delaiExpiration): self
     {
         $this->delaiExpiration = $delaiExpiration;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

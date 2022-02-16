@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<article>
+  <h2>Mémo {{ memo.id }}</h2>
+  <div class="content">
+    {{ memo.contenu }}
+  </div>
+  <div>
+    <p>Heure d'expiration</p>
+    <p>{{ heureExpiration | date('H:i')}}</p>
+  </div>
+  <a href="{{ path('memo_show', {'id': memo.id})}}">http://memo.test/{{memo.id}}</a>
+</article>
+
+{% endblock %}
