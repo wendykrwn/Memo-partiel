@@ -10,7 +10,15 @@
 {{ form_start(form)}}
 
 {{ form_row(form.contenu)}}
-{{ form_row(form.delaiExpiration)}}
+
+<div class="row flex align-items-center">
+  <div class="col-sm-2">
+    {{ form_row(form.delaiExpiration)}}
+  </div>
+  <div class="col">
+    minutes
+  </div>
+</div>
 
 <button type="submit" class="mt-2 btn btn-success">Créer</button>
 
